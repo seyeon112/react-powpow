@@ -24,10 +24,15 @@ theme.PALETTE = {
     black: "#131313",
     white: "#fff",
     petsonal:{
-        orange: "#FFCC66",
+        orange: "#FD820B",
         lightGold: "#FFE599",
+        gold: "#FFDA3A",
         gradation: "linear-gradient(0,  #C9B6E4, #FFDD88)",
-        lightPurple: "#C9B6E4",
+        lightPurple: "#A990DD",
+        skyBlue : "#1EA5FC",
+        sagaGreen : "#91CEC2",
+        iceBlue : "#87B9E7",
+        dustySilver: "linear-gradient(0,  #788991, #C8D9E1)",
         deepPurple: "#8B6D9C"
     }
 }

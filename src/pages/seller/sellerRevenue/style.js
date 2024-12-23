@@ -95,7 +95,6 @@ S.TableHeader = styled.thead``;
 
 S.TableRow = styled.tr`
     display: flex;
-    justify-content: space-between;
 `;
 
 S.TableHeaderRow = styled.tr`
@@ -132,7 +131,6 @@ S.TableFooterCell = styled.td`
 S.TableFooter = styled.tr`
     display: flex;
     font-weight: bold;
-    justify-content: space-between;
 `;
 
 

@@ -16,14 +16,13 @@ const HeartBtn = ({ id, type }) => {
   // 리덕스에 로그인한 유저의 id
   const { currentUser } = useSelector((state) => state.user);
   const memberId = currentUser?.id ? currentUser?.id : 0; 
-
+  
   const { commLikes, productLikes, isUpdate } = useContext(HeartContext).state;
   const { setIsUpdate } = useContext(HeartContext).action;
 
   // 좋아요인지 아닌지 비교
-  const isCommunityLike = commLikes.some((comm) => {
-    return comm.id === Number(id);  // id를 숫자로 변환하여 비교
-  });
+  const isCommunityLike = commLikes.some((comm) => Number(comm.postId) === Number(id));
+
 
   const isProductLike = productLikes.some((product) => {
     return product.productId === Number(id);  // id를 숫자로 변환하여 비교
@@ -51,7 +50,16 @@ const HeartBtn = ({ id, type }) => {
     }
   }
   
-  const handleLike = async () => {
+  const handleLike = async (e) => {
+    console.log(isCommunityLike)
+    console.log(isProductLike)
+    console.log("fetchType", fetchType)
+    console.log("fetchMethodType", fetchMethodType)
+    console.log("fetchData", fetchData)
+    
+    e.stopPropagation();
+    e.preventDefault();
+    
     if(!memberId){
       alert("로그인 해주세요.")
       navigate("/login")

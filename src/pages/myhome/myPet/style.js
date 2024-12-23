@@ -50,9 +50,9 @@ S.Profilepic = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 20px;
-  >img{
-    width: 120px;
-    height: 120px;
+  & img{
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
   }
 `

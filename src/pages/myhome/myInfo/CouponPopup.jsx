@@ -17,6 +17,7 @@ const CouponPopup = ({couponData, handleShowPopup, onChangeInsertCoupon}) => {
         // 쿠폰 등록 로직을 여기에 추가
     };
 
+
     return (
         <S.CouponBgWrap>
             <S.CouponPopupContainer>

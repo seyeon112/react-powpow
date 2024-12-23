@@ -458,14 +458,14 @@ S.InfoSeller = styled.div`
         flex-direction: column;
         justify-content: center;
         text-align: left;
-        width: 900px;
+        width: 100%;
         height: 600px;
         //margin-top: 20px;
     `;
 
     S.ProductReviewDetail = styled.div`
         overflow-y: auto;
-        width: 933px;
+        width: 100%;
         height: 600px;
     
         // 스크롤바 전체 트랙
@@ -518,13 +518,14 @@ S.InfoSeller = styled.div`
     S.ReviewContent = styled.div`
         margin-left: 100px;
         margin-right: 50px;
-        width: 500px;
+        width: 100%;
     `;
 
     S.HugReview = styled.div`
         display: flex;
         flex-direction: row;
         margin-bottom: 20px;
+        padding : 0 20px;
         & button{
             background:#fff;
             border: none;
@@ -545,7 +546,7 @@ S.InfoSeller = styled.div`
         border: 1px solid #d9d9d9;
         margin-bottom: 31px;
         margin-top: 31px;
-        width: 800px;
+        width: 100%;
     `;
 
     S.UserInfo = styled.div`

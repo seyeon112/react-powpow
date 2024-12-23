@@ -4,7 +4,6 @@ import Slide from './Slide.jsx';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { CommunityContext } from '../../../context/communityContext.js';
-import HeartBtn from '../community/HeartBtn.jsx';
 import FollowBtn from './FollowBtn';
 
 const UserPost = () => {
@@ -17,8 +16,8 @@ const UserPost = () => {
     // 내가 지금 누른 게시글
     const { communityState } = useContext(CommunityContext);
     const { communites } = communityState;
-  
-    const foundPost = communites?.find((cm) => String(cm.id) === String(id));
+
+    const foundPost = communites?.find((cm) => String(cm.id) === String(id)) || {};  // 기본값을 빈 객체로 설정
 
     // 댓글 조회
     useEffect(() => {
@@ -41,16 +40,16 @@ const UserPost = () => {
     const handleCommentSubmit = async () => {
         if (newComment.trim() === '') return;
 
-        const token = localStorage.getItem('jwtToken'); 
-        if(!token){
-            return alert("로그인 후 이용해주세요.")
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            return alert("로그인 후 이용해주세요.");
         }
 
         const response = await fetch(`http://localhost:10000/comments/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, 
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
                 memberId: memberId,
@@ -102,26 +101,29 @@ const UserPost = () => {
                     <S.MyPostBox>
                         <S.ProfileBox>
                             <S.MyProfile>
-                                <Link to={`/post/list?postId=${id}`}>
+                                <Link to={`/post/list/${id}`}>
                                     <img src="/assets/images/community/default-myProfile.png" alt="프로필" />
                                 </Link>
                             </S.MyProfile>
+                            {/* foundPost가 없으면 '회원 정보 없음'으로 표시 */}
+                            <S.NickName>{foundPost.memberNickName || '회원 정보 없음'}</S.NickName>
+
                             {/* 팔로우 버튼에 targetUserId 전달 */}
                             {foundPost && <FollowBtn targetUserId={foundPost.memberId} />}
                         </S.ProfileBox>
                         <Slide />
                         <S.MyPostUnderBox>
                             <S.PostUnder>
-                                <HeartBtn id={id} type={"community"} />
+                                {/*<HeartBtn id={id} type={"community"} />*/}
                                 <S.LikeNumber></S.LikeNumber>
-                                <S.DotBtn><button><img src="/assets/images/community/dots.png" alt="삼점메뉴" /></button></S.DotBtn>
+                                {/*<S.DotBtn><button><img src="/assets/images/community/dots.png" alt="삼점메뉴" /></button></S.DotBtn>*/}
                             </S.PostUnder>
                             {foundPost ? (
                                 <S.PostContent>
                                     {foundPost.postContent}
                                 </S.PostContent>
                             ) : (
-                                <S.PostContent>게시글을 찾을 수 없습니다.</S.PostContent> 
+                                <S.PostContent>게시글을 찾을 수 없습니다.</S.PostContent>
                             )}
                         </S.MyPostUnderBox>
                     </S.MyPostBox>
@@ -129,14 +131,14 @@ const UserPost = () => {
                     <S.CommentDiv>
                         <S.CommentNumber>
                             <S.Comment>댓글</S.Comment>
-                            <S.Comment>{comments.length}</S.Comment> 
+                            <S.Comment>{comments.length}</S.Comment>
                         </S.CommentNumber>
                         <S.MyComment>
                             <S.MyProfile>
                                 <img src="/assets/images/community/default-myProfile.png" alt="프로필" />
                             </S.MyProfile>
                             <S.InputContainer>
-                                <input 
+                                <input
                                     onChange={(e) => setNewComment(e.target.value)}
                                     value={newComment}
                                     placeholder='댓글을 입력해주세요.' />
@@ -144,22 +146,22 @@ const UserPost = () => {
                             </S.InputContainer>
                         </S.MyComment>
                         <S.Scroll>
-                        {comments.map((comment) => (
-                            <S.CommentBox key={comment.id}>
-                                <Link to={`/post/list?postId=${id}`}>
-                                    <img src="/assets/images/community/default-profile.png" alt="프로필" />
-                                </Link>
-                                <S.CommentText>
-                                    <S.NickName>{comment.memberNickname}</S.NickName>
-                                    <p>{comment.commentContent}</p>
-                                </S.CommentText>
-                                <S.DotBtn>
-                                    <button onClick={() => handleCommentDelete(comment.id)}>
-                                        <img src="/assets/images/community/trash.jpg" alt="삭제아이콘" />
-                                    </button>
-                                </S.DotBtn>
-                            </S.CommentBox>
-                        ))}
+                            {comments.map((comment) => (
+                                <S.CommentBox key={comment.id}>
+                                    <Link to={`/post/list/${id}`}>
+                                        <img src="/assets/images/community/default-profile.png" alt="프로필" />
+                                    </Link>
+                                    <S.CommentText>
+                                        <S.NickName>{comment.memberNickname}</S.NickName>
+                                        <p>{comment.commentContent}</p>
+                                    </S.CommentText>
+                                    <S.DotBtn>
+                                        <button onClick={() => handleCommentDelete(comment.id)}>
+                                            <img src="/assets/images/community/trash.jpg" alt="삭제아이콘" />
+                                        </button>
+                                    </S.DotBtn>
+                                </S.CommentBox>
+                            ))}
                         </S.Scroll>
                     </S.CommentDiv>
                 </S.MyPostPageBox>

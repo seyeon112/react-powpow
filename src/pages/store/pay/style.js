@@ -14,11 +14,10 @@ import { Link } from "react-router-dom";
 const S = {}
 
 S.DeliveryWrap = styled.div`
-  width: 1920px;
   margin: 0 auto;
+  overflow: hidden;
 `
 S.Delivery = styled.div`
-  width: 1440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -122,7 +121,6 @@ S.DeliveryInfoBox = styled.div`
   height: 242px;
   margin-left: 89px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   & > p {
     ${h7Regular}
@@ -156,23 +154,22 @@ S.Checkingbox = styled.div`
   width: 20px;
   height: 20px;
   cursor: pointer;
-
   
 `
 
-S.MemberAddress = styled.div`
+S.MemberInput = styled.input`
   width: 553px;
-  height: 44px;
+  height: 50px;
   display: flex;
-  flex-wrap: wrap;
   overflow: hidden;
-  margin-top: 22px;
-  margin-left: 15px;
-  margin-bottom: 20px;
+  border: solid 1px #333;
+  border-radius: 10px;
+  margin: 15px 0 0 15px;
+  padding : 0 12px;
 `
 
-S.PayMemo = styled.div`
-  margin-left: 15px;
+S.PayMemo = styled.input`
+
 `
 
 S.NextTimeCheck = styled.div`
@@ -197,8 +194,9 @@ S.OrderBox = styled.div`
 `
 
 S.OrderTitle = styled.div`
+width: 848px;
   ${h4Bold}
-  margin-bottom: 80px;
+  margin-top: 80px;
 `
 
 S.OrderDeliveryStart = styled.div`
@@ -261,38 +259,34 @@ S.DeliveryProductInfo = styled.div`
   flex-direction: column;
   margin-left: 36px;
 
-  & p:nth-child(1) {
-    width: 365px;
-    height: 44px;
-    ${h7Regular}
-    margin-bottom: 10px;
-    display: block;
-
-  }
-
 `
 S.ProductInfoPrice = styled.div`
   width: 170px;
   height: 25px;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  align-items: center;
+  
+  & p:first-child {
+    color: rgb(200, 63, 63);
+    font-weight: bold;
+    margin-right: 10px;
+  }
 
-& p:nth-child(1) {
-  width: 75px;
-  height: 20px;
-  ${h6Medium}
-}
+  & p:nth-child(2){
+    color: #d9d9d9;
+    text-decoration: line-through;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 
-& p:nth-child(2) {
-  width: 65px; 
-  height: 20px;
-  color: #828282;
-  ${h7Medium}
-  text-decoration: line-through;
-}
+  & p:last-child{
+    color: #333;
+    font-weight: bold;
+  }
+  
 `
 
 
@@ -794,5 +788,105 @@ S.ModalBg = styled.div`
   z-index: 90;
 `
 
+// 가격
+
+  S.PriceWrap = styled.div`
+   display: flex;
+  `
+
+  S.RealPrice = styled.p`
+    color: #d9d9d9;
+    text-decoration: line-through;
+    font-weight: bold;
+    margin-right: 10px;
+  `
+
+  S.Price = styled.p`
+    color: #333;
+    font-weight: bold;
+  `
+
+  S.DiscountPrice = styled.p`
+    color: rgb(200, 63, 63);
+    font-weight: bold;
+    margin-right: 10px;
+  `
+
+  S.Total = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding : 20px 0;
+    margin : 20px 0;
+    border-bottom: solid 1px #d9d9d9;
+
+    &:last-child {
+      border: none;
+      font-size: 22px;
+      font-weight: bold;
+    }
+  `
+
+  S.Border = styled.div`
+    width: 742px;
+    margin: 0 auto 40px auto; 
+    border: solid 1px #d9d9d9;
+    border-radius: 10px;
+    padding: 20px 100px;
+  `
+
+
+S.ButtonWrap = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 742px;
+  margin: 0 auto 200px auto;
+
+  & button:first-child{
+    border: solid 1px #ddd;
+    padding : 12px 80px;
+    background: none;
+    border-radius: 30px;
+    margin: 0 10px 0 0 
+  }
+
+  & button:last-child{
+    border: solid 1px #ddd;
+    padding : 12px 80px;
+    background: #113f8a;
+    color : #fff;
+    border-radius: 30px;
+  }
+`
+
+S.OrderSuccess = styled.div`
+  width: 600px;
+  height : 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1, h2 {
+    font-size: 20px;
+    margin: 0 0 12px 0;
+  }
+  
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 200px;
+    height : 40px;
+    background: #113f8a;
+    color : #fff;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 30px 0 0 0;
+  }
+`
 
 export default S;

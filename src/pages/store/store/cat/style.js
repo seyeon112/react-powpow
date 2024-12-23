@@ -12,15 +12,15 @@ import {
 
 const S = {}
 
-// 배너
-S.BannerContainer = styled.div`
+    // 배너
+    S.BannerContainer = styled.div`
       position: relative;
       width: 100%;
       height: 603px;
       margin-bottom: 139px;
     `;
 
-S.BannerComent = styled.div`
+    S.BannerComent = styled.div`
         position: absolute;
         font-size: 50px;
         font-weight: bold;
@@ -51,13 +51,14 @@ S.BannerComent = styled.div`
             cursor: pointer;
         }
     `;
+
 S.CustomProductMessage = styled.p`
   width: 100%;
   text-align: center;
 `;
 
 
-S.BannerButton = styled.img`
+    S.BannerButton = styled.img`
         width: 24px;
         height: 25px;
         padding-top: 10px;
@@ -65,27 +66,28 @@ S.BannerButton = styled.img`
         cursor: pointer;
     `;
 
-S.Content = styled.div`
+    S.Content = styled.div`
             margin-bottom: 100px;
             ${flexColumnCenter};
         width: 100%;
+        overflow: hidden;
     `;
 
-S.Banner = styled.img`
+    S.Banner = styled.img`
             width: 1920px;
     `;
 
 
 
 
-// 카테고리들
-S.CategoriesWrap = styled.div`
+    // 카테고리들
+    S.CategoriesWrap = styled.div`
             margin-bottom: 56px;
             gap: 47px;
             ${flexRowCenter};
     `;
 
-S.Category = styled.span`
+    S.Category = styled.span`
             border-radius: 100px;
             ${flexColumnCenter};
             ${h8Medium};
@@ -99,7 +101,7 @@ S.SortButtonWrapper = styled.div`
   display: flex;
   width: 500px;
   justify-content: space-between;
-  margin: 176px 0 60px auto;
+  margin: 0 0 60px auto;
   
   & > div {
     position: relative;
@@ -167,7 +169,7 @@ S.ColorCircle = styled.div`
 
 
 
-// 드롭다운 필터링 버튼들
+    // 드롭다운 필터링 버튼들
 
 S.DropdownWrapper = styled.div`
     position: relative;
@@ -179,7 +181,7 @@ S.DropdownContainer = styled.div`
     gap: 10px;
 `;
 
-S.DropdownContainer = styled.div`
+    S.DropdownContainer = styled.div`
         display: flex;
         position: relative;
 
@@ -193,7 +195,7 @@ S.DropdownContainer = styled.div`
         }
     `;
 
-S.DropdownItem = styled.div`
+    S.DropdownItem = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -216,7 +218,7 @@ S.DropdownItem = styled.div`
         }
     `;
 
-S.DropdownContent = styled.div`
+    S.DropdownContent = styled.div`
         position: absolute;
         top: 50px;
         left: 10px;
@@ -230,7 +232,7 @@ S.DropdownContent = styled.div`
     `;
 
 
-S.Menu = styled.div`
+    S.Menu = styled.div`
         cursor: pointer;
         
         & :hover{
@@ -238,72 +240,6 @@ S.Menu = styled.div`
         }
     `;
 
-
-S.ProductWrap = styled.div`
-        display: flex;
-        flex-direction: row;
-        width: 1440px;
-        height: 1070px;
-        overflow: hidden;
-        background: #fff;
-        //height: calc((100% - 30px) / 2) !important;
-
-        ///* Center slide text vertically */
-        //display: flex;
-        //justify-content: center;
-        //align-items: center;
-    `;
-
-
-// S.Product = styled.div`
-//         width: 342px;
-//         height: 480px;
-//         position: relative;
-//     box-sizing: border-box;
-//     text-align: center;
-//     margin: 0;
-//     padding: 10px;
-//
-//         & span{
-//             display: inline-block;
-//             width: 342px;
-//             margin-top: 15px;
-//             flex-shrink: 0;
-//             white-space: nowrap;
-//             overflow: hidden;
-//             text-overflow: ellipsis;
-//             //text-align: center;
-//         }
-//
-//     //& p{
-//     //    display: flex;
-//     //    width: 342px;
-//     //    margin-top: 5px;
-//     //}
-//
-//         & button{
-//             width: 342px;
-//             min-height: 42px;
-//             margin-top: 14px;
-//             border-radius: 5px;
-//             background-color: #fff;
-//             border: 1px solid #D9D9D9;
-//         }
-//
-//         & img{
-//             width: 342px;
-//             height: 341px;
-//             border-radius: 10px;
-//         }
-//     .like-icon {
-//         width: 40px;
-//         height: 40px;
-//         position: absolute;
-//         top: 10px;
-//         right: 10px;
-//     }
-//
-// `;
 
 S.SwiperDirection = styled.div`
     display: flex;
@@ -367,20 +303,7 @@ S.RecommendedPrice = styled.div`
        
     `;
 
-//
-// S.Cart = styled.img`
-//         width: 40px;
-//         height: 40px;
-//
-// `;
-
-S.ColorProducts = styled.div`
-        // //     margin: 0 auto;
-        // //     ${flexRowCenter};
-        // // width: 1440px;
-        // max-width: 1440px;
-        // display: flex;
-        // flex-direction: row;
+    S.ColorProducts = styled.div`
         margin: 0 auto;
         width: 100%;
         max-width: 1440px;
@@ -388,14 +311,10 @@ S.ColorProducts = styled.div`
         flex-wrap: wrap; 
         justify-content: center;
         align-items: flex-start; 
-        //gap: 24px; 
     `;
 
-
-
-
-// 컬러 제품들 타이틀부터 제품까지 묶임
-S.Box = styled.div`
+    // 컬러 제품들 타이틀부터 제품까지 묶임
+    S.Box = styled.div`
         display: flex;
             
         & button{
@@ -409,22 +328,22 @@ S.Box = styled.div`
         }
     `;
 
-S.BoxTitle = styled.span`
+    S.BoxTitle = styled.span`
             font-size: 40px;
             margin-right: 530px;
             font-weight: bold;
             width: 380px;
         `;
 
-S.Arrow = styled.img`
+    S.Arrow = styled.img`
         width: 10px;
         height: 10px;
         margin-left: 10px;
     `
 
-// 베스트
+    // 베스트
 
-S.BestTitle = styled.span`
+    S.BestTitle = styled.span`
         ${h1Bold};
         margin-bottom: 50px;
         margin-top: 180px;
@@ -432,13 +351,13 @@ S.BestTitle = styled.span`
         position: relative;
     `;
 
-S.BestProducts = styled.div`
+    S.BestProducts = styled.div`
             max-width: 1440px;
             display: flex;
             flex-direction: row;
         `;
 
-S.BestProduct = styled.div`
+    S.BestProduct = styled.div`
             display: flex;
             //align-items: center;
             //justify-content: center;
@@ -485,18 +404,18 @@ S.BestProduct = styled.div`
             }
         `;
 
-S.NormalPrice = styled.div`
-    display: flex;
-    flex-direction: row;
-    & p{
-        margin-right: 10px;
-    }
+    S.NormalPrice = styled.div`
+        display: flex;
+        flex-direction: row;
+        & p{
+            margin-right: 10px;
+        }
+        
+    `;
 
-`;
 
 
-
-S.BestProductWrap = styled.div`
+    S.BestProductWrap = styled.div`
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -504,28 +423,27 @@ S.BestProductWrap = styled.div`
         `;
 
 
-// 추천
-S.RecommendedProduct = styled.div`
+    // 추천
+    S.RecommendedProduct = styled.div`
             margin-top: 150px;
-    max-width: 1440px;
+        max-width: 1440px;
         `;
-S.Title = styled.span`
+    S.Title = styled.span`
             ${h1Bold};
             margin-bottom: 50px;
             margin-top: 180px;
         `;
 
-S.RecommendedWrap = styled.div`
+    S.RecommendedWrap = styled.div`
             grid-template-columns: repeat(4, 1fr);
             display: grid;
             justify-content: space-between;
             gap: 24px;
-            max-width: 1440px;
             margin-top: 50px;
         `;
 
-// 특가
-S.SpecialProduct = styled.div`
+    // 특가
+    S.SpecialProduct = styled.div`
         display: flex;
         flex-direction: column;
         width: 244px;
@@ -599,19 +517,19 @@ S.SpecialProduct = styled.div`
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 1;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             flex-shrink: 0;
         }
 
         /* 첫 번째 상품 할인율 스타일 */
         .first-product-discount {
-            ${h4Medium};
+            ${h5Medium};
         }
 
         /* 첫 번째 상품 가격 스타일 */
         .first-product-price {
-            ${h4Medium};
+            ${h5Medium};
         }
         
         .rest{
@@ -622,13 +540,13 @@ S.SpecialProduct = styled.div`
     `;
 
 
-S.Price = styled.div`
+    S.Price = styled.div`
         display: flex;
         flex-direction: row;
     `;
 
 
-S.SpecialProducts = styled.div`
+    S.SpecialProducts = styled.div`
         display: grid;
         grid-template-columns: 538px repeat(3, 1fr);
         gap: 50px;
@@ -662,8 +580,207 @@ S.SpecialProducts = styled.div`
         }
     `;
 
-S.SpecialWrap = styled.div`
+    S.SpecialWrap = styled.div`
         margin-top: 150px;
     `;
+
+// 스타일 추가
+    S.ProductWraper = styled.div`
+        width: 1440px;
+        margin: 0 auto;
+        row-gap: 48px;
+        column-gap: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        
+        & .swiper-grid > .swiper-wrapper {
+            gap: 48px 30px !important;
+        }
+        
+        & .swiper-grid-column .swiper-wrapper {
+            display: flex !important;
+            height: 100% !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
+        }
+
+        & .swiper {
+            width: 100%;
+            margin: 0 0 120px 0;
+        }
+
+        & .swiper-wrapper {
+            height: ${(props) => props.$length < 5 ?  "530px" : "1200px"} !important;
+        }
+
+        & .swiper-slide {
+            margin: 0 !important;
+        }
+    `
+
+    S.NoneMessage = styled.p`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 530px;
+        font-size: 20px;
+        font-weight: 600;
+    `
+
+    S.ProductWrap = styled.div`
+        display: flex;
+        flex-direction: column;
+    `
+
+    S.imageWrap = styled.div`
+        position: relative;
+        width: 342px;
+        height: 342px;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 0 0 16px 0;
+
+        &.small {
+            width: 264px;
+            height: 264px;
+        }
+
+        & .thumb {
+            width: 100%;
+        }
+
+        & .heart {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            width: 40px;
+        }
+    `
+
+    S.ProductTitle = styled.p`
+        font-size: 18px;
+        width: 342px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 500;
+        margin: 0 0 6px 0;
+    `
+
+    S.ProductPriceWrap = styled.div`
+        display: flex;
+        margin : 0 0 20px 0;
+        & span {
+            display: block;
+            font-size: 18px;
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        & .discount {
+            color: rgb(200, 63, 63);
+        }
+    `
+
+    S.ButtonWrap = styled.div`
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border: solid 1px #bebebe;
+        border-radius: 5px;
+        width: 100%;
+        height: 40px;
+
+        & img {
+            margin: 0 4px 0 0;
+        }
+        
+        & p {
+            font-size: 16px;
+            font-weight: 600;
+        }
+    `
+
+    S.BestProductWraper = styled.div`
+        width: 1440px;
+        row-gap: 48px;
+        column-gap: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto 120px auto;
+
+        & .swiper {
+            width: 100%;
+            margin: 0 0 120px 0;
+
+        }
+
+        & .swiper-wrapper {
+            height: 440px;
+            gap: 30px;
+        }
+
+
+        & .thumb {
+            width: 100%;
+        }
+        & .swiper-slide {
+            margin: 0 !important;
+        }
+    `
+
+    S.MainTextWrap = styled.div`
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 40px 0;
+    `
+
+    S.MainTitle = styled.p`
+        font-size: 40px;
+        font-weight: 900;
+    `
+
+    // 스타일 추가
+
+    S.SpecialLayout = styled.div`
+        width: 1440px;
+        display: flex;
+        flex-direction: row;
+        gap: 72px;
+        & .big {
+            width: 537px;
+            flex-shrink: 0;
+
+            .image-wrap {
+                width: 537px;
+                height: 537px;
+            }
+
+        }
+    `
+
+    S.SpecialProductWraper = styled.div`
+        
+        column-gap: 49px;
+        row-gap: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 0 120px 0;
+
+        & .item{
+            width: 244px;
+        }
+
+        & .image-wrap {
+            width: 244px;
+            height: 244px;
+        }
+        
+        & .thumb {
+            width: 100%;
+        }
+    `
 
 export default S;

@@ -26,7 +26,7 @@ const SellerHeader = () => {
         {name: "상품 관리", path: "/seller"}
       ],
       submenu: [
-        { name: "상품조회", path: "/seller" },
+        { name: "상품 조회", path: "/seller" },
         { name: "상품 등록", path: "/seller/product-write" }
       ]
     },
@@ -35,7 +35,7 @@ const SellerHeader = () => {
         {name: "주문 관리", path: "/seller/seller-order"}
       ],
       submenu: [
-        { name: "주문조회", path: "/seller/seller-order" }
+        { name: "주문 조회", path: "/seller/seller-order" }
       ]
     },
     {
@@ -43,7 +43,7 @@ const SellerHeader = () => {
         {name: "정산 관리", path: "/seller/seller-adjustment"}
       ],
       submenu: [
-        { name: "정산내역조회", path: "/seller/seller-adjustment" }
+        { name: "정산 내역 조회", path: "/seller/seller-adjustment" }
       ]
     },
     {
@@ -51,7 +51,7 @@ const SellerHeader = () => {
         {name: "판매자 관리", path: `/seller/seller-info`}
       ],
       submenu: [
-        { name: "판매자정보 관리", path: `/seller/seller-info` }
+        { name: "판매자 정보 관리", path: `/seller/seller-info` }
       ]
     },
     {

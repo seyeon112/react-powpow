@@ -3,6 +3,7 @@ import S from "./style";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import DaumPostcode from "react-daum-postcode";
 
 const ProfileUpdate = () => {
     // Redux 상태 가져오기
@@ -15,6 +16,15 @@ const ProfileUpdate = () => {
     const [petImagePreview, setPetImagePreview] = useState(null); // 프로필 이미지 미리보기
     const [userData, setUserData] = useState(currentUser); // 사용자 데이터 관리
     const [isVisible, setIsVisible] = useState(false); // 인증번호 입력창 표시 여부
+    const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
+
+
+    const [address, setAddress] = useState({
+        postcode: "",
+        baseAddress: "",
+        detailAddress: "",
+    });
+
 
     const navigate = useNavigate();
     // const localJwtToken = localStorage.getItem("jwtToken");
@@ -73,6 +83,15 @@ const ProfileUpdate = () => {
         }
     };
 
+    const handleComplete = (data) => {
+        setAddress((prev) => ({
+            ...prev,
+            postcode: data.zonecode,
+            baseAddress: data.address,
+        }));
+        setIsPostcodeOpen(false);
+    };
+
     // 폼 제출 핸들러
     const handleFormSubmit = handleSubmit(async (data) => {
 
@@ -104,8 +123,8 @@ const ProfileUpdate = () => {
                 memberNickname : memberNickname,
                 memberEmail : memberEmail,
                 memberPhone : memberPhone,
-                memberZipcode : memberZipcode,
-                memberAddress : memberAddress,
+                memberZipcode : address.postcode,
+                memberAddress : address.baseAddress,
                 memberAddressDetail : memberAddressDetail
             }
 
@@ -215,6 +234,7 @@ const ProfileUpdate = () => {
                                 <S.h7>닉네임</S.h7>
                                 <input
                                     placeholder="닉네임을 입력하세요"
+                                    {...register("memberNickname")}
                                     value={userData.memberNickname}
                                     onChange={handleChange}
                                 />
@@ -233,7 +253,7 @@ const ProfileUpdate = () => {
                                         value={userData.memberPhone}
                                         onChange={handleChange}
                                     />
-                                    <S.AuthButton onClick={() => setIsVisible(true)}>인증번호</S.AuthButton>
+                                    <S.AuthButton type = "button" onClick={() => setIsVisible(true)}>인증번호</S.AuthButton>
                                 </S.MemberCertification>
                             </S.MemberInputBox>
 
@@ -252,30 +272,65 @@ const ProfileUpdate = () => {
                                 </S.MemberInput2Box>
                             )}
 
+
                             <S.MemberInputBox>
                                 <S.h7Address>주소</S.h7Address>
                                 <S.MemberInputAddress>
                                     <S.ZipCode>
                                         <input
-                                            type="text"
-                                            name="memberZipcode"
-                                            placeholder="우편주소를 입력해주세요"
-                                            value={userData.memberZipcode}
+                                            placeholder="우편번호"
+                                            {...register("memberZipcode")}
+                                            value={address.postcode} // 상태값을 반영
+                                            onChange={
+                                                (e) =>
+                                                    setAddress((prev) => ({
+                                                        ...prev,
+                                                        postcode: e.target.value,
+                                                    })) // postcode만 업데이트
+                                            }
                                             readOnly
                                         />
-                                        <p>우편번호</p>
+                                        <S.AuthButton
+                                            type="button"
+                                            onClick={() => setIsPostcodeOpen(true)}
+                                        >
+                                            우편번호
+                                        </S.AuthButton>
                                     </S.ZipCode>
+                                    {isPostcodeOpen && (
+                                        <S.ModalBackground>
+                                            <S.ModalContent>
+                                                <S.CloseAddressBtn
+                                                    type="button"
+                                                    onClick={() => setIsPostcodeOpen(false)}
+                                                >
+                                                    닫기
+                                                </S.CloseAddressBtn>
+                                                <DaumPostcode
+                                                    onComplete={handleComplete}
+                                                    style={{ width: "100%", height: "400px" }}
+                                                />
+                                            </S.ModalContent>
+                                        </S.ModalBackground>
+                                    )}
                                     <input
-                                        type="text"
-                                        name="memberAddress"
-                                        placeholder="간편주소"
-                                        value={userData.memberAddress}
-                                        onChange={handleChange}
+                                        placeholder="기본주소"
+                                        id="Sample6Address"
+                                        {...register("memberAddress")}
+                                        value={address.baseAddress} // 상태값을 반영
+                                        onChange={
+                                            (e) =>
+                                                setAddress((prev) => ({
+                                                    ...prev,
+                                                    baseAddress: e.target.value,
+                                                })) // baseAddress만 업데이트
+                                        }
+                                        readOnly
                                     />
                                     <input
-                                        type="text"
-                                        name="memberAddressDetail"
-                                        placeholder="상세주소를 입력하세요"
+                                        id="Sample6DetailAddress"
+                                        placeholder="상세주소"
+                                        {...register("memberAddressDetail")}
                                         value={userData.memberAddressDetail}
                                         onChange={handleChange}
                                     />

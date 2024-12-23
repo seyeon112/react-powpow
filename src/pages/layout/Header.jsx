@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setUserStatus } from '../../modules/user';
 
 const Header = () => {
-    const { isLogin } = useSelector((state) => state.user);
+    const { isLogin, currentUser } = useSelector((state) => state.user);
+    const memberId = currentUser.id;
     const [isHover, setIsHover] = useState(false);
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState(""); 
@@ -50,7 +51,6 @@ const Header = () => {
         }
     };
 
-
     return (
         <S.HeaderWrap className={isHover ? "active" : ""} onMouseOut={handleMouseOut}>
             <S.Header>
@@ -77,7 +77,7 @@ const Header = () => {
                         </S.SubMenu>
                         <S.SubMenu>
                             <li><Link to={"/post/recommend/all"}>추천 바구니</Link></li>
-                            <li><Link to={"/post/list?postId=${id}"}>내 게시물</Link></li>
+                            <li><Link to={`/post/list/${memberId}`}>내 게시물</Link></li>
                             <li></li>
                         </S.SubMenu>
                         <S.SubMenu>
@@ -109,7 +109,7 @@ const Header = () => {
                             onClick={handleShowSearch}
                         />
                     )}
-                    <Link to={""} ><img src={`${process.env.PUBLIC_URL}/assets/images/layout/delivery.png`} alt="로고" /></Link>
+                    {/* <Link to={""} ><img src={`${process.env.PUBLIC_URL}/assets/images/layout/delivery.png`} alt="로고" /></Link> */}
                     <Link to={"/cart"} ><img src={`${process.env.PUBLIC_URL}/assets/images/layout/cart.png`} alt="로고" /></Link>
                     <p>|</p>
                     { isLogin ? (

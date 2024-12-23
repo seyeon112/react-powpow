@@ -64,7 +64,7 @@ const JoinPhone = () => {
       return alert("인증 시도 횟수를 초과했습니다. 다시 시도해주세요.");
     }
 
-    if (authNumber === testCode) {
+    if (authNumber === verificationCode) {
       alert("인증번호가 일치합니다.");
       setAttempts(0);
       setIsBlocked(false);

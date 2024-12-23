@@ -139,18 +139,24 @@ const ProductReview = () => {
     };
 
 
-    const renderStars = (rating) => {
+    const renderStars = (rating, isSelectable = false, onSelect = null) => {
         return [...Array(5)].map((_, index) => (
             <span
                 key={index}
+                onClick={() => isSelectable && onSelect && onSelect(index + 1)}
                 style={{
                     color: index < rating ? 'gold' : 'gray',
-                    marginRight: '2px'
+                    marginRight: '2px',
+                    cursor: isSelectable ? 'pointer' : 'default'
                 }}
             >
                 ★
             </span>
         ));
+    };
+
+    const handleStarClick = (rating) => {
+        setSelectedRating(rating);
     };
 
     const allReview = reviews.map(({
@@ -185,10 +191,6 @@ const ProductReview = () => {
         </div>
     ));
 
-    const handleStarClick = (rating) => {
-        setSelectedRating(rating);
-    };
-
     return (
         <S.ReviewContainer>
             <S.ReviewCount>
@@ -215,7 +217,9 @@ const ProductReview = () => {
                     <S.NewReview>
                         <S.ReviewTitle>
                             <span>리뷰 남기기</span>
-                            <div>{renderStars(selectedRating)}</div>
+                            <div>
+                                {renderStars(selectedRating, true, handleStarClick)}
+                            </div>
                         </S.ReviewTitle>
                         <S.ReviewInput>
                             <input

@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import {
-    h1Bold,h7Bold,h8Regular,gray500,h7Regular,h2Bold,h6Regular,h9Regular, h9Bold, flexRowCenter,h6Bold, h11Regular
+    h1Bold,
+    h7Bold,
+    h8Regular,
+    gray500,
+    h7Regular,
+    h2Bold,
+    h6Regular,
+    h9Regular,
+    h9Bold,
+    flexRowCenter,
+    h6Bold,
+    h11Regular,
+    h8Bold
 } from '../../../global/common'
 import theme from "../../../global/theme";
 import { Link } from 'react-router-dom'
@@ -447,6 +459,14 @@ S.CompletionMain = styled.div`
     justify-content: center;
     margin: 0 auto;
     height: 80vh;
+
+    p {
+        margin : 0 0 6px 0;
+    }
+    button {
+        margin: 40px 0 0 0;
+        font-size: 16px;
+    }
 `;
 
 S.LogoBox = styled.div`
@@ -500,12 +520,12 @@ S.NextButton = styled.button`
 S.Text1 = styled.p`
     font-size: 28px;
     line-height: 40px;
-    font-weight: bold;
+    font-weight: 600;
 `
 S.Text = styled.p`
     font-size: 28px;
     line-height: 40px;
-    font-weight: bold;
+    font-weight: 600;
 `
 
 S.Notification = styled.div`
@@ -602,6 +622,141 @@ S.EditButton = styled.label`
   width: 96px;
   height: 32px;
 `
+
+S.InputText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+    & .inputTextGap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+`;
+
+S.TextBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+S.Red = styled.p`
+  color: #131313;
+`;
+
+S.InputField = styled.input`    
+    width: 285px;
+    padding: 4px 26px;
+    border: 1px solid #acaca8;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #828282;
+    &::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
+`;
+
+S.AuthNumberContainer = styled.div`
+  margin-top: 10px;
+`;
+
+S.P = styled.p`
+  color: red;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+  margin-left: 2px;
+`;
+
+S.AuthButton = styled.button`
+  position: absolute;
+  right: 14px;
+  top: 16px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  padding: 8px 15px;
+  color: #c83f3f;
+  border: none;
+  cursor: pointer;
+  ${h8Bold};
+  ${flexRowCenter};
+`;
+
+S.InputContainer = styled.div`
+  position: relative;
+  width: 464px;
+`;
+
+S.InputField1 = styled.input`
+    width: 285px;
+    padding: 4px 26px;
+    border: 1px solid #acaca8;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #828282;
+`;
+
+S.ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`
+S.ModalContent = styled.div`
+  width: 600px;
+  height: 500px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+`
+S.CloseAddressBtn = styled.button`
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 10px;
+`
+
+S.Mark = styled.div`
+  width: 22px;
+  height: 22px;
+  background-image: url(${process.env.PUBLIC_URL}/assets/images/join/eye-off.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  position: absolute;
+  right: 29px;
+  top: 50px;
+  transform: translateY(-50%);
+`;
+
+S.Message = styled.p`
+  font-size: 14px;  
+  color: #828282; 
+  text-align: left;
+  line-height: 1; 
+  margin-bottom: 10px; 
+  margin-right: 35px;
+`;
+
+
+
+
 
 
 

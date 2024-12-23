@@ -19,13 +19,13 @@ const SellerProductContainer = () => {
     const pageTitle = () => {
         switch (location.pathname) {
             case '/seller/product':
-                return '상품조회';
+                return '상품 조회';
             case '/seller/product-write':
                 return '신규 상품등록';
             case '/seller/product-update':
-                return '상품수정';
+                return '상품 수정';
             default:
-                return '상품조회';
+                return '상품 조회';
         }
     };
 

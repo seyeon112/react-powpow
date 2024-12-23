@@ -5,11 +5,15 @@ import { PetsonalContext } from "../../context/petsonalContext";
 import ProductResult from "./ProductResult";
 import CatProductResult from "./CatProductResult";
 import { yellow200 } from "../../global/common";
+import { ProductContext } from "../../context/productContext";
 
 const PetsonalResult = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { result } = useContext(PetsonalContext);
+
+  const { productState } = useContext(ProductContext);
+  const { products } = productState;
 
   const [petsonalResult, setpetsonalResult] = useState([]);
   const [colorResult, setColorResult] = useState({
@@ -59,7 +63,7 @@ const PetsonalResult = () => {
     petFileName,
   } = petsonalResult;
   const { imageSrc, message, boxColor, title } = colorResult;
-
+  
   return (
     <div>
       <S.Frame>
@@ -189,7 +193,8 @@ const PetsonalResult = () => {
           </S.ResultBox>
 
           {/* 강아지일 때 강아지 상품 아닐때 고양이 상품 (이런 문법안되나?)*/}
-          {petKind === "강아지" ? <ProductResult /> : <CatProductResult />}
+          {/* {petKind === "강아지" ? <ProductResult /> : <CatProductResult />} */}
+          <ProductResult products={products} petKind={petKind} />
         </S.ResultContainer>
       </S.Frame>
     </div>

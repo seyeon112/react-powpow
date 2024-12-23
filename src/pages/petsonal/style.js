@@ -513,4 +513,109 @@ S.Content = styled.div`
   width: 100%;
 `;
 
+  S.MainTextWrap = styled.div`
+    width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 40px auto;
+  `
+
+  S.MainTitle = styled.p`
+    font-size: 40px;
+    font-weight: 900;
+  `
+
+  S.ProductWraper = styled.div`
+    width: 1440px;
+    margin: 0 auto 150px auto;
+    row-gap: 48px;
+    column-gap: 24px;
+    display: flex;
+    flex-wrap: wrap;
+  `
+
+  // S.ProductWrap = styled.div`
+  //   grid-template-columns: repeat(4, 1fr);
+  //   display: grid;
+  //   justify-content: space-between;
+  //   gap: 24px;
+  // `;
+
+  S.imageWrap = styled.div`
+    position: relative;
+    width: 342px;
+    height: 342px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 0 16px 0;
+
+  &.small {
+    width: 264px;
+    height: 264px;
+  }
+
+  & .thumb {
+    width: 100%;
+  }
+
+  & .heart {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 40px;
+  } 
+`
+
+S.ProductWrap = styled.div`
+  /* grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  justify-content: space-between;
+  gap: 24px; */
+`;
+
+S.ProductTitle = styled.p`
+  font-size: 18px;
+  width: 342px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  margin: 0 0 6px 0;
+`
+
+S.ProductPriceWrap = styled.div`
+  display: flex;
+  margin : 0 0 20px 0;
+  & span {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      margin-right: 4px;
+  }
+
+  & .discount {
+      color: rgb(200, 63, 63);
+  }
+`
+
+S.ButtonWrap = styled.div`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px #bebebe;
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+
+& img {
+    margin: 0 4px 0 0;
+}
+
+& p {
+    font-size: 16px;
+    font-weight: 600;
+}
+`
+
 export default S;

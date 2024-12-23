@@ -51,6 +51,7 @@ const S = {}
             cursor: pointer;
         }
     `;
+
 S.CustomProductMessage = styled.p`
   width: 100%;
   text-align: center;
@@ -592,17 +593,39 @@ S.RecommendedPrice = styled.div`
         display: flex;
         flex-wrap: wrap;
         
+        & .swiper-grid > .swiper-wrapper {
+            gap: 48px 30px !important;
+        }
+        
+        & .swiper-grid-column .swiper-wrapper {
+            display: flex !important;
+            height: 100% !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
+        }
+
         & .swiper {
+            width: 100%;
             margin: 0 0 120px 0;
         }
 
         & .swiper-wrapper {
-            height: 1000px;
+            height: ${(props) => props.$length < 5 ?  "530px" : "1200px"} !important;
         }
 
         & .swiper-slide {
             margin: 0 !important;
         }
+    `
+
+    S.NoneMessage = styled.p`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 530px;
+        font-size: 20px;
+        font-weight: 600;
     `
 
     S.ProductWrap = styled.div`
@@ -689,13 +712,16 @@ S.RecommendedPrice = styled.div`
         margin: 0 auto 120px auto;
 
         & .swiper {
+            width: 100%;
             margin: 0 0 120px 0;
+
         }
 
         & .swiper-wrapper {
             height: 440px;
             gap: 30px;
         }
+
 
         & .thumb {
             width: 100%;

@@ -52,7 +52,6 @@ const PetList = () => {
   useEffect(() => {
     console.log("Pets updated:", pets);
     if (!loading && pets.length === 0) {
-      alert("펫을 등록해주세요");
       navigate("/my-pet/pet-not");
     }
   }, [pets, navigate, loading]);
@@ -76,9 +75,9 @@ const PetList = () => {
             </S.Profilepic>
             <S.Name>{petName}</S.Name>
             <span>{petBirth}</span>
-            <Link to={`/my-pet/pet-update/${id}`}>
+            {/* <Link to={`/my-pet/pet-update/${id}`}>
               <S.EditButton2 type="button">편집</S.EditButton2>
-            </Link>
+            </Link> */}
             <S.DeleteButton type="button" onClick={() => getDelete(id)}>삭제</S.DeleteButton>
           </S.PetCard2>
         ))}

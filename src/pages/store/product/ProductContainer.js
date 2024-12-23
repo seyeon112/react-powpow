@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import React, {useContext, useEffect, useState} from 'react';
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -24,6 +24,7 @@ const ProductContainer = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const navigate = useNavigate();
     const foundProduct = products?.find((pr) => String((pr).id) === String(id));
 
     // const {
@@ -43,7 +44,7 @@ const ProductContainer = () => {
             setRelatedProducts(filtered);
         }
     }, [products, foundProduct]);
-
+    
     // 리뷰 데이터 가져오기
     useEffect(() => {
         const getReviews = async () => {
@@ -161,6 +162,14 @@ const ProductContainer = () => {
         ? (reviews.reduce((sum, review) => sum + review.reviewStar, 0) / reviews.length)
         : 0;
 
+
+    const handleBuyNow = () => {
+        if (foundProduct) {
+            const productWithQuantity = { ...foundProduct, quantity: count };
+            navigate("/pay", { state: { products: [productWithQuantity] } });
+        }
+    }
+
     return (
         <div>
             <div className="body-container">
@@ -245,9 +254,7 @@ const ProductContainer = () => {
                             <Link to="/cart">
                                 <S.CheckButton type="button">장바구니</S.CheckButton>
                             </Link>
-                            <Link to="/pay">
-                                <S.PaymentButton>바로구매</S.PaymentButton>
-                            </Link>
+                            <S.PaymentButton onClick={handleBuyNow}>바로구매</S.PaymentButton>
                         </S.ButtonContainer>
                     </S.ProductInfoRight>
                 </S.BodyWrap>

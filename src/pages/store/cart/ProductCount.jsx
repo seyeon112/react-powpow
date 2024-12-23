@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import S from './style';
 
-
-
 const ProductCount = ({product}) => {
 
   const [count, setCount] = useState(product.productCount)

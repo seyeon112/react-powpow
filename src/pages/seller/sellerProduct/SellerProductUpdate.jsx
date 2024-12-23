@@ -30,6 +30,7 @@ const SellerProductUpdate = () => {
     const [productRealPrice, setProductRealPrice] = useState("");
     const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm({ mode: 'onChange' });
     const navigate = useNavigate();
+    const { currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
         const getProduct = async () => {
@@ -38,10 +39,10 @@ const SellerProductUpdate = () => {
                 if (!response.ok) return console.error('데이터가 없습니다');
                 const productData = await response.json();
 
-            // //     day format
-            //     const editedDate = new Date(productData.productEditDate).toISOString().split('T')[0];
+            //     day format
+                const editedDate = new Date(productData.productEditDate).toISOString().split('T')[0];
 
-            //     초기
+            //     초기값
                 setProductName(productData.productName);
                 setProductCode(productData.productCode);
                 setProductAnimal(productData.productAnimal);
@@ -49,10 +50,6 @@ const SellerProductUpdate = () => {
                 setProductColor(productData.productColor);
                 setProductStock(productData.productStock);
                 setProductCategory(productData.productCategory);
-                setProductDate(productData.productDate);
-                setProductEditDate(productData.productEditDate);
-                setProductFileName(productData.productFileName);
-                setProductFilePath(productData.productFilePath);
                 setProductPrice(productData.productPrice);
                 setProductRealPrice(productData.productRealPrice);
                 setDeliveryFeeKind(productData.deliveryFeeKind);
@@ -69,10 +66,6 @@ const SellerProductUpdate = () => {
                 setValue("productColor", productData.productColor);
                 setValue("productStock", productData.productStock);
                 setValue("productCategory", productData.productCategory);
-                setValue("productDate", productData.productDate);
-                setValue("productEditDate", productData.productEditDate);
-                setValue("productFileName", productData.productFileName);
-                setValue("productFilePath", productData.productFilePath);
                 setValue("productPrice", productData.productPrice);
                 setValue("productRealPrice", productData.productRealPrice);
                 setValue("deliveryFeeKind", productData.deliveryFeeKind);
@@ -93,29 +86,29 @@ const SellerProductUpdate = () => {
     const handleFormSubmit = async (data) => {
         try{
             const formData = new FormData();
-            const { productName, productCode, productAnimal, productSize, productColor, productStock, productCategory, productDate, productEditDate,
-            productFileName, productFilePath, productPrice, productRealPrice, deliveryFeeKind, deliveryPayWhen, deliveryHow, deliveryFee, deliveryCompany, deliveryFeeFree } = data;
+            const { productName, productCode,mainImage, subImage1,subImage2,subImage3,productDetail, productAnimal, productSize, productColor, productStock, productCategory, productDate, productEditDate, productPrice, productRealPrice, deliveryFeeKind, deliveryPayWhen, deliveryHow, deliveryFee, deliveryCompany, deliveryFeeFree } = data;
 
-            formData.append("productId", currentProduct.id);
-            formData.append("productName", productName);
-            formData.append("productCode", productCode);
-            formData.append("productAnimal", productAnimal);
-            formData.append("productSize", productSize);
-            formData.append("productColor", productColor);
-            formData.append("productStock", productStock);
-            formData.append("productCategory", productCategory);
-            formData.append("productDate", productDate);
-            formData.append("productEditDate", productEditDate);
-            formData.append("productFileName", productFileName);
-            formData.append("productFilePath", productFilePath);
-            formData.append("productPrice", productPrice);
+            formData.append("memberId", currentUser.id)
+            formData.append("deliveryCompany", deliveryCompany)
+            formData.append("deliveryFee", deliveryFee)
+            formData.append("deliveryFeeFree", deliveryFeeFree)
+            formData.append("deliveryFeeKind", deliveryFeeKind)
+            formData.append("deliveryHow", deliveryHow)
+            formData.append("deliveryPayWhen", deliveryPayWhen)
+            formData.append("productAnimal", productAnimal)
+            formData.append("productCategory", productCategory)
+            formData.append("productColor", productColor)
+            formData.append("productDetail", productDetail)
+            formData.append("productCode", productCode)
+            formData.append("productName", productName)
+            formData.append("productPrice", productPrice)
             formData.append("productRealPrice", productRealPrice)
-            formData.append("deliveryFeeKind", deliveryFeeKind);
-            formData.append("deliveryPayWhen", deliveryPayWhen);
-            formData.append("deliveryHow", deliveryHow);
-            formData.append("deliveryFee", deliveryFee);
-            formData.append("deliveryCompany", deliveryCompany);
-            formData.append("deliveryFeeFree", deliveryFeeFree);
+            formData.append("productSize", productSize)
+            formData.append("productStock", productStock)
+            formData.append("uploadFile", mainImage[0])
+            formData.append("uploadFile", subImage1[0])
+            formData.append("uploadFile", subImage2[0])
+            formData.append("uploadFile", subImage3[0])
 
             if (productFileName && productFileName[0]){
                 formData.append("uploadFile", productFileName[0]);
@@ -127,13 +120,15 @@ const SellerProductUpdate = () => {
 
             const resData = await response.json();
             formData.append("uuid", resData.uuid);
+            formData.append("productFilePath", productFilePath);
+            formData.append("productFileName", productFileName);
 
             const updateProductResponse = await  fetch(`http://localhost:10000/products/seller-product/${id}`, {
                 method: "PUT",
                 body: formData,
             });
 
-            const deliveryResponse = await fetch("http://localhost:10000/deliveries/seller-product/{id}", {
+            const deliveryResponse = await fetch(`http://localhost:10000/deliveries/seller-product/${id}`, {
                 method: "PUT",
                 body: formData,
         });
@@ -197,6 +192,13 @@ const SellerProductUpdate = () => {
                                    name="productName" {...register("productName", {required: "상품명은 필수 입력 항목입니다."})}
                                    value={productName}
                                    onChange={(e) => setProductName(e.target.value)}/>
+                        </S.ListWrap>
+                        <S.ListWrap>
+                            <S.Division>상품코드</S.Division>
+                            <input className="require-value" type="text"
+                                   {...register("productCode", {
+                                       required: true,
+                                   })}/>
                         </S.ListWrap>
                         <S.ListWrap>
                             <S.Division>소비자가</S.Division>

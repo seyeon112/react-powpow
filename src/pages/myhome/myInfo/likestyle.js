@@ -21,7 +21,8 @@ S.LikeListNoneBox = styled.div`
     flex-direction: column;
     margin-top: 102px;
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    
+    margin: 100px auto;
+
     & p:nth-child(1) {
         ${h6Bold}
         color: #909090;
@@ -70,32 +71,47 @@ S.StoreTitle = styled.div`
 `
 
 S.OtherClickBtn = styled.div`
-    width: 112px;
+    width: 130px;
     height: 18px;
     ${h9Regular}
+    font-size: 14px;
     cursor : pointer;
 `
+
+S.ImageWrap = styled.div`
+    width: 190px;
+    height: 190px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 0 10px 0;
+
+    & img {
+        width: 100%;
+    }
+`
+
 S.ProductLikes = styled.div`
     width: 190px;
-    height: 259px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 
     & > img {
-        height: 190px;
         border-radius: 20px;
         width: 100%;
         cursor: pointer;
     }
 `
 
-S.ProductName = styled.div`
-    width: 127px;
+S.ProductName = styled.p`
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
     height: 36px;
-    display: flex;
-    flex-wrap: wrap;
-
+    font-size: 18px;
+    margin : 8px 0 4px 0;
     
     & > p {
         ${h9Bold}
@@ -122,6 +138,8 @@ S.productLikeList = styled.div`
 
 S.ProfileInfo = styled.div`
     
+    display: flex;
+    align-items: center;
     & > img {
         width: 40px;
         height: 40px;
@@ -155,18 +173,20 @@ S.CommTitle = styled.div`
 `
 
 S.OtherClickCommBtn = styled.div`
-    width: 123px;
+    width: 150px;
     height: 18px;
     ${h9Regular}
-    cursor: pointer;
+    font-size: 14px;
+    cursor : pointer;
 `
 
 S.CommLikeList = styled.div`
     width: 823px;
     display: flex;
     flex-wrap: wrap;
-    align-items: first;
-    gap: 21px;
+    align-items: center;
+    row-gap: 40px;
+    column-gap: 20px;
     margin-bottom: 155px;
 
 `

@@ -1,124 +1,59 @@
-import React, {useState} from 'react';
-import S from "./style";
+import React, { useEffect, useState } from 'react';
+import S from './style';
 
 const SellerRevenueList = () => {
+    const [sales, setSales] = useState([]);
+    const [error, setError] = useState(null);
 
-    // const lists =
+    useEffect(() => {
+        const getSales = async () => {
+            try {
+                const response = await fetch('http://localhost:10000/orders/order/sales');
+                if (!response.ok) {
+                    throw new Error('데이터를 가져오는 데 실패했습니다.');
+                }
+                const data = await response.json();
+                setSales(data);
+            } catch (error) {
+                console.error('데이터 가져오기 중 오류 발생:', error);
+                setError(error.message);
+            }
+        };
 
-    // const [couponData, setCouponData] = useState([
-    //     {
-    //         couponCode : "1111111111",
-    //         couponDiscountRate : "50",
-    //         couponStart : "2024-10-04",
-    //         couponEnd : "2024-10-30",
-    //         couponQuantity : "11",
-    //     },
-    //     {
-    //         couponCode : "1111111111",
-    //         couponDiscountRate : "50",
-    //         couponStart : "2024-10-04",
-    //         couponEnd : "2024-10-30",
-    //         couponQuantity : "11",
-    //     },
-    //     {
-    //         couponCode : "1111111111",
-    //         couponDiscountRate : "50",
-    //         couponStart : "2024-10-04",
-    //         couponEnd : "2024-10-30",
-    //         couponQuantity : "11",
-    //     },
-    //     {
-    //         couponCode : "1111111111",
-    //         couponDiscountRate : "50",
-    //         couponStart : "2024-10-04",
-    //         couponEnd : "2024-10-30",
-    //         couponQuantity : "11",
-    //     },
-    // ]);
+        getSales();
+    }, []); // 빈 배열로 설정하여 한 번만 실행
 
-    // const products = [
-    //     {
-    //         productImage : "/assets/images/cart/cart-product.png",
-    //         productName : "오쥬 바이 로우즈 독 치킨가슴살&호박 파우치 강아지 간식 69g (유통기한 2025-02225까지)",
-    //         productStock : 1,
-    //         productPrice : 4_500,
-    //         productDiscountPrice : 4_050,
-    //         productCoupon : 0,
-    //         reviewStar: "⭐⭐⭐⭐⭐",
-    //         reviewCount: 25,
-    //         productCount: 1,
-    //         deliveryFee : 0
-    //     },
-    //     {
-    //         productImage : "/assets/images/cart/cart-product-2.png",
-    //         productName : "오쥬 바이 로우즈 독 치킨가슴살&호박 파우치 강아지 간식 69g (유통기한 2025-02225까지)",
-    //         productStock : 1,
-    //         productPrice : 4_500,
-    //         productDiscountPrice : 4_050,
-    //         productCoupon : 0,
-    //         reviewStar: "⭐⭐⭐⭐⭐",
-    //         reviewCount: 25,
-    //         productCount: 13,
-    //         deliveryFee : 0
-    //     },
-    //     {
-    //         productImage : "/assets/images/cart/cart-product-3.png",
-    //         productName : "오쥬 바이 로우즈 독 치킨가슴살&호박 파우치 강아지 간식 69g (유통기한 2025-02225까지)",
-    //         productStock : 1,
-    //         productPrice : 4_500,
-    //         productDiscountPrice : 4_050,
-    //         productCoupon : 0,
-    //         reviewStar: "⭐⭐⭐⭐⭐",
-    //         reviewCount: 25,
-    //         productCount: 17,
-    //         deliveryFee : 0
-    //     },
-    //     {
-    //         productImage : "/assets/images/cart/cart-product-4.png",
-    //         productName : "오쥬 바이 로우즈 독 치킨가슴살&호박 파우치 강아지 간식 69g (유통기한 2025-02225까지)",
-    //         productStock : 1,
-    //         productPrice : 4_500,
-    //         productDiscountPrice : 4_050,
-    //         productCoupon : 0,
-    //         reviewStar: "⭐⭐⭐⭐⭐",
-    //         reviewCount: 25,
-    //         productCount: 11,
-    //         deliveryFee : 0
-    //     },
-    //     {
-    //         productImage : "/assets/images/cart/cart-product-5.png",
-    //         productName : "오쥬 바이 로우즈 독 치킨가슴살&호박 파우치 강아지 간식 69g (유통기한 2025-02225까지)",
-    //         productStock : 1,
-    //         productPrice : 4_500,
-    //         productDiscountPrice : 4_050,
-    //         productCoupon : 0,
-    //         reviewStar: "⭐⭐⭐⭐⭐",
-    //         reviewCount: 25,
-    //         productCount: 5,
-    //         deliveryFee : 0
-    //     }
-    // ]
+    // Helper function to safely parse numbers
+    const parseToNumber = (value) => {
+        return isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+    };
+
+    // sales 상태는 여기에서 console.log로 출력
+    console.log('판매량', sales);
+
     return (
         <S.Frame>
             <S.Title>
                 <p>매출조회</p>
             </S.Title>
+            {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
             <form action="seller-serach-ok.seller" method="post">
-                <input type="hidden" name="sellerId" value={""} />
+                <input type="hidden" name="sellerId" value={''} />
                 <S.NoticeSearch>
                     <S.InputGroup>
-                        <input type="date" id="start-date" name="startDate" value={""} />
+                        <input type="date" id="start-date" name="startDate" />
                         <span>~</span>
-                        <input type="date" id="end-date" name="endDate" value={""} />
+                        <input type="date" id="end-date" name="endDate" />
                     </S.InputGroup>
                     <S.Buttons>
                         <S.SearchBtn>검색</S.SearchBtn>
-                        <S.ResetBtn>초기화</S.ResetBtn>
+                        <S.ResetBtn type="reset">초기화</S.ResetBtn>
                     </S.Buttons>
                 </S.NoticeSearch>
             </form>
             <S.NoticeList>
                 <S.Table>
+                    <thead>
                     <S.TableHeader>
                         <S.TableHeaderRow>
                             <S.TableHeaderCell>날짜별</S.TableHeaderCell>
@@ -129,26 +64,52 @@ const SellerRevenueList = () => {
                             <S.TableHeaderCell>판매금액</S.TableHeaderCell>
                         </S.TableHeaderRow>
                     </S.TableHeader>
+                    </thead>
                     <tbody>
-                    {/*{lists.map((list, index) => (*/}
+                    {sales.length > 0 ? (
+                        sales.map((sale, index) => (
+                            <S.TableRow key={index}>
+                                <S.TableCell>{new Date(sale.orderDate).toISOString().split('T')[0]}</S.TableCell>
+                                <S.TableCell>{sale.totalCount}</S.TableCell>
+                                <S.TableCell>{sale.totalPrice}</S.TableCell>
+                                <S.TableCell>{sale.orderCancelCount}</S.TableCell>
+                                <S.TableCell>{sale.cancelPrice}</S.TableCell>
+                                <S.TableCell>
+                                    {parseToNumber(sale.totalPrice) - parseToNumber(sale.cancelPrice)}
+                                </S.TableCell>
+                            </S.TableRow>
+                        ))
+                    ) : (
                         <S.TableRow>
-                            <S.TableCell>날짜별</S.TableCell>
-                            <S.TableCell>주문 금액</S.TableCell>
-                            <S.TableCell>판매 수량</S.TableCell>
-                            <S.TableCell>취소수량</S.TableCell>
-                            <S.TableCell>취소금액</S.TableCell>
-                            <S.TableCell>주문가격 - 판매가격</S.TableCell>
+                            <S.TableCell colSpan={6}>데이터가 없습니다.</S.TableCell>
                         </S.TableRow>
-                    {/*))}*/}
-                    <S.TableFooter>
-                        <S.TableFooterCell>합</S.TableFooterCell>
-                        <S.TableFooterCell>총 주문 금액</S.TableFooterCell>
-                        <S.TableFooterCell>총 판매 수량</S.TableFooterCell>
-                        <S.TableFooterCell>총 취소수량</S.TableFooterCell>
-                        <S.TableFooterCell>총 취소금액</S.TableFooterCell>
-                        <S.TableFooterCell>총 판매가격</S.TableFooterCell>
-                    </S.TableFooter>
+                    )}
                     </tbody>
+                    {sales.length > 0 && (
+                        <tfoot>
+                        <S.TableFooter>
+                            <S.TableFooterCell>합계</S.TableFooterCell>
+                            <S.TableFooterCell>
+                                {sales.reduce((acc, sale) => acc + parseToNumber(sale.totalCount), 0)}
+                            </S.TableFooterCell>
+                            <S.TableFooterCell>
+                                {sales.reduce((acc, sale) => acc + parseToNumber(sale.totalPrice), 0)}
+                            </S.TableFooterCell>
+                            <S.TableFooterCell>
+                                {sales.reduce((acc, sale) => acc + parseToNumber(sale.orderCancelCount), 0)}
+                            </S.TableFooterCell>
+                            <S.TableFooterCell>
+                                {sales.reduce((acc, sale) => acc + parseToNumber(sale.cancelPrice), 0)}
+                            </S.TableFooterCell>
+                            <S.TableFooterCell>
+                                {sales.reduce(
+                                    (acc, sale) => acc + (parseToNumber(sale.totalPrice) - parseToNumber(sale.cancelPrice)),
+                                    0
+                                )}
+                            </S.TableFooterCell>
+                        </S.TableFooter>
+                        </tfoot>
+                    )}
                 </S.Table>
             </S.NoticeList>
         </S.Frame>

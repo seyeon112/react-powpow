@@ -54,8 +54,10 @@ const ProfileList = () => {
                                 {/* 프로필 이미지 렌더링 */}
                                 <img
                                     src={
-                                        currentUser.memberImage || 
-                                        `http://localhost:10000/member/display?fileName=${currentUser.memberFilePath}/${currentUser.memberFileName}` 
+                                        currentUser.memberImage ||
+                                        currentUser.memberFilePath && currentUser.memberFileName
+                                            ? `http://localhost:10000/member/display?fileName=${currentUser.memberFilePath}/${currentUser.memberFileName}`
+                                            : `${process.env.PUBLIC_URL}/assets/images/default-profile-image.jpg`
                                     }
                                     alt="프로필 사진"
                                 />

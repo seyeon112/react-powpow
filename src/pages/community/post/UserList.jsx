@@ -20,6 +20,7 @@ const UserList = () => {
   const { communityState } = useContext(CommunityContext);
   const { communites } = communityState;
   const memberId = currentUser.id;
+  const [isUpdate, setIsUpdate] = useState(false)
   const [posts, setPosts] = useState([]);
 
   // 로그인 상태 확인
@@ -110,6 +111,7 @@ const UserList = () => {
   };
 
   // 팔로우 취소 버튼 클릭 시 처리
+
   const handleUnfollowClick = async (targetUserId) => {
     try {
       const response = await fetch(`http://localhost:10000/follows/cancel`, {
@@ -119,8 +121,8 @@ const UserList = () => {
           Authorization: `Bearer ${localJwtToken}`,
         },
         body: JSON.stringify({
-          followerId: currentUser.id,
-          followingId: targetUserId,
+          followerMemberId: Number(currentUser.id),
+          followingMemberId: Number(targetUserId),
         }),
       });
 
@@ -128,6 +130,7 @@ const UserList = () => {
         console.log("팔로우 취소 성공");
         setFollowersList(followersList.filter((user) => user.id !== targetUserId));
         setFollowersCount(followersList.length - 1);
+        setIsUpdate(!isUpdate)
       } else {
         console.error("팔로우 취소 실패");
       }
@@ -168,7 +171,19 @@ const UserList = () => {
           <S.MyProfileCard>
             <div className="MYProfile-img-wrapper">
               <S.MyProfileImage>
-                <p>{currentUser.username || "유저"}</p>
+                <S.ProfileImage>
+                    {/* 프로필 이미지 렌더링 */}
+                    <img
+                        src={
+                            currentUser.memberImage ||
+                            currentUser.memberFilePath && currentUser.memberFileName
+                                ? `http://localhost:10000/member/display?fileName=${currentUser.memberFilePath}/${currentUser.memberFileName}`
+                                : `${process.env.PUBLIC_URL}/assets/images/default-profile-image.jpg`
+                        }
+                        alt="프로필 사진"
+                    />
+                    <p>{currentUser.memberNickname}</p>
+                </S.ProfileImage>
               </S.MyProfileImage>
             </div>
           </S.MyProfileCard>

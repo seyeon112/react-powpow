@@ -17,6 +17,16 @@ const MyInfoContainer = () => {
     //     }
     // }, [])
 
+    const navigate = useNavigate();
+    useEffect(() => {
+        const jwtToken = localStorage.getItem("jwtToken");
+        console.log(jwtToken)
+        
+        if (!jwtToken) {
+            navigate("/login"); 
+        }
+    }, [navigate]);
+
     return (
         <div>
             <S.MyHomeLeft>

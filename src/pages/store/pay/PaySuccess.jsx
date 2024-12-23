@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import S from './style';
 
 const PaySuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [responseData, setResponseData] = useState(null);
-  
-  console.log(responseData);
 
   useEffect(() => {
     async function confirm() {
@@ -16,7 +15,7 @@ const PaySuccess = () => {
         paymentKey: searchParams.get("paymentKey"),
       };
 
-      const response = await fetch("http://localhost:10000/api/payments", {
+      const response = await fetch("http://localhost:10000/payment/toss", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,11 +42,12 @@ const PaySuccess = () => {
   }, [searchParams]);
   
   return (
-    <div>
+    <S.OrderSuccess>
       <h1>결제가 성공적으로 완료되었습니다!</h1>
       <h2>주문번호 : {searchParams.get("orderId")}</h2>
       <h2>주문가격 : {searchParams.get("amount")}</h2>
-    </div>
+      <Link to={"/store"}>계속 쇼핑하기</Link>
+    </S.OrderSuccess>
   );
 };
 

@@ -7,13 +7,14 @@ const FindId = () => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [authNumber, setAuthNumber] = useState(""); 
-  const [setGeneratedAuthNumber] = useState(""); 
   const [attempts, setAttempts] = useState(0); 
   const [isBlocked, setIsBlocked] = useState(false); 
   const [allCheck, setAllCheck] = useState(false); 
-  const { state, action } = useContext(FindContext);
+  const { action } = useContext(FindContext);
+  const [verificationCode, setVerificationCode] = useState(""); // 받아온 인증번호
   const [ memberEmail ] = useState(""); // 이메일 상태 추가
   const { setMemberEmail } = action;
+
 
   // 인증번호 발송
   const transferSms = async () => {
@@ -21,24 +22,23 @@ const FindId = () => {
       return alert("휴대폰 번호를 입력해주세요.");
     }
 
-    await fetch("http://localhost:10000/member/sms/find-id", {
+    await fetch("http://localhost:10000/member/sms", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ memberPhone: phoneNumber }),
+      body: JSON.stringify( phoneNumber )
     })
       .then((res) => res.json())
-      .then((data) => {
-        setGeneratedAuthNumber(data.verificationCode);
-        alert("인증번호를 발송했습니다.");
-      })
+      .then((data) => setVerificationCode(data.verificationCode))
       .catch((error) => {
         console.error("Error:", error);
-        alert("인증번호 전송 실패");
       });
+
+    return alert("인증번호를 발송했습니다.");
   };
 
+  // 회원 조회
   const findMemberByPhone = async () => {
     if (!phoneNumber) {
       return alert("휴대폰 번호를 입력해주세요.");
@@ -49,7 +49,7 @@ const FindId = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.memberEmail)
+        console.log(data.memberEmail);
         if (data && data.memberEmail) {
           setMemberEmail(data.memberEmail);
           alert("회원 정보를 찾았습니다.");
@@ -64,13 +64,12 @@ const FindId = () => {
   };
 
   // 인증번호 확인
-  const testCode = "123456";
   const confirmVerificationCode = () => {
     if (isBlocked) {
       return alert("인증 시도 횟수를 초과했습니다. 다시 시도해주세요.");
     }
 
-    if (authNumber === testCode) {
+    if (authNumber === verificationCode) {  
       alert("인증번호가 일치합니다.");
       setAttempts(0);
       setIsBlocked(false);
@@ -90,6 +89,8 @@ const FindId = () => {
       }
     }
   };
+
+
 
   return (
     <>

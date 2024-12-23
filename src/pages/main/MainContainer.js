@@ -31,7 +31,7 @@ const Main = () => {
 
   const recommendCommunityLarge = communites.slice(0, 1).map(({id, imageName1, memberNickName}) => (
       <S.LargePost key={id}>
-        <Link to={`/post/read?postId=${id}`}>
+        <Link to={`/post/read/${id}`}>
           <S.MainProfileInfo>
             <img
               src={`${process.env.PUBLIC_URL}/assets/images/community/${imageName1}`}
@@ -116,8 +116,8 @@ const Main = () => {
           </S.DiscountText>
         </S.CardTextWrap>
         <S.Cart className="small">
-          <Link to="/cart">
-            <p>담기</p>
+          <Link to={`/store/read/${id}`}>
+            <p>상세보기</p>
           </Link>
         </S.Cart>
       </S.ProductCard>
@@ -182,12 +182,12 @@ const Main = () => {
                     </S.Heart>
                   </S.HotImage>
                   <S.Cart>
-                    <Link to="/cart">
-                      <img
+                    <Link to={"/store"}>
+                      {/* <img
                         src={`${process.env.PUBLIC_URL}/assets/images/layout/shopping_cart_icon.png`}
                         alt="장바구니아이콘"
-                      />
-                      <p>담기</p>
+                      /> */}
+                      <p>인기상품 보러가기</p>
                     </Link>
                   </S.Cart>
                 </S.ImageAndCart>

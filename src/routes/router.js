@@ -89,14 +89,11 @@ import NoticeListPage from "../pages/myhome/notice/NoticeListPage";
 import Notice from "../pages/myhome/notice/Notice";
 import NoticeListAll from "../pages/admin/notice/NoticeListAll";
 import PetTestList from "../pages/myhome/myPet/PetTestList";
-import Flushies from "../pages/store/store/dog/Flushies";
-import Treats from "../pages/store/store/dog/Treats";
-import Clothes from "../pages/store/store/dog/Clothes";
-import HealthCare from "../pages/store/store/dog/HealthCare";
 import RecommendPost from "../pages/community/post/RecommendPost";
-import PostTagColor from "../pages/community/post/PostTagColor";
 import SellerRead from "../pages/seller/sellerInfo/SellerRead";
 import Result from "../pages/store/store/search/result";
+import StoreDog from "../pages/store/store/dog/StoreDog";
+import StoreCat from "../pages/store/store/cat/StoreCat";
 
 
 const router = createBrowserRouter([
@@ -226,19 +223,19 @@ const router = createBrowserRouter([
                 children : [
                     {
                         index: true,
-                        element: <Flushies />
+                        element: <StoreDog />
                     },
                     {
                         path: 'treats',
-                        element: <Treats />
+                        element: <StoreDog />
                     },
                     {
                         path: 'clothes',
-                        element: <Clothes />
+                        element: <StoreDog />
                     },
                     {
                         path: 'health-care',
-                        element: <HealthCare />
+                        element: <StoreDog />
                     },
                 ]
             },
@@ -246,6 +243,22 @@ const router = createBrowserRouter([
                 path: '/store-cat',
                 element: <StoreCatContainer />,
                 children : [
+                    {
+                        index: true,
+                        element: <StoreCat />
+                    },
+                    {
+                        path: 'treats',
+                        element: <StoreCat />
+                    },
+                    {
+                        path: 'clothes',
+                        element: <StoreCat />
+                    },
+                    {
+                        path: 'health-care',
+                        element: <StoreCat />
+                    },
                 ]
             },
             {
@@ -297,7 +310,7 @@ const router = createBrowserRouter([
                         element: <UserPost />,
                     },
                     {
-                        path: "list",
+                        path: "list/:memberid",
                         element: <UserList />,
                     },
                     {

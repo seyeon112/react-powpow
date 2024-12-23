@@ -21,8 +21,6 @@ const navigate = useNavigate();
                 console.log(data)
                 const coupon = {
                     couponTitle : data.couponTitle,
-                    couponCategory : data.couponCategory,
-                    couponAnimal : data.couponAnimal,
                     couponCode : data.couponCode,
                     couponStart : data.couponStart,
                     couponEnd : data.couponEnd,
@@ -96,7 +94,6 @@ const navigate = useNavigate();
                     <S.Box1>
                         <S.Label htmlFor="coupon-category">동물 카테고리</S.Label>
                         <S.CouponCategory
-                            {...register("couponAnimal")}
                         >
                             <option value="고양이">고양이</option>
                             <option value="강아지">강아지</option>
@@ -106,7 +103,6 @@ const navigate = useNavigate();
                     <S.Box1>
                         <S.Label htmlFor="coupon-category">제품 카테고리</S.Label>
                         <S.CouponCategory
-                            {...register("couponCategory")}
                         >
                             <option value="장난감">장난감</option>
                             <option value="간식/사료">간식/사료</option>
@@ -169,9 +165,9 @@ const navigate = useNavigate();
                                     <input
                                         type="number"
                                         value={rate}
+                                        placeholder="예) 7%"
                                         onChange={(e) => setRate(e.target.value)}
                                         disabled={selectedRate !== "custom"}
-                                        placeholder="예) 7%"
                                         min="0"
                                         max="100"
                                     />

@@ -62,8 +62,7 @@ const SellerProductWrite = () => {
                     .then((res) => res.json())
                     .then((res) => {
                         console.log(res)
-                        
-                        // navigate("/seller")
+                        navigate("/seller")
                     })
             })
             .catch(console.error)

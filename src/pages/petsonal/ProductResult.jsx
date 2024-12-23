@@ -1,51 +1,110 @@
-import React, { useEffect, useState } from 'react';
-import ClothesColor from '../store/store/dog/clothes/ClothesColor';
+import React from 'react';
 import S from "./style";
 import Footer from '../layout/Footer';
+import { Link } from 'react-router-dom';
+import HeartBtn from '../community/community/HeartBtn';
 
-const ProductResult = () => {
+const ProductResult = ({products, petKind}) => {
 
-  const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // 고양이 추천상품
+    const catRecommendProducts = products
+        .filter((p) => p.productAnimal === "cat")
+        .filter((p) => p.productCategory === "의류")
+        .slice(0, 8).map(({
+        id, productName, productFileName, productPrice, productRealPrice, productDiscount
+    }) => (
+        <S.ProductWrap key={id}>
+            <Link to={`/store/read/${id}`}>
+                <S.imageWrap>
+                    <HeartBtn className="heart" id={id} type={"product"} />
+                    <img className='thumb' src={`${process.env.PUBLIC_URL}/assets/images/products/${productFileName}`} alt="" />
+                </S.imageWrap>
+                <div className='title-wrap'>
+                    <S.ProductTitle>{productName}</S.ProductTitle>
+                    <S.ProductPriceWrap>
+                        { productDiscount === 0 ? (
+                            <span>{productPrice}</span>
+                        ) : (
+                            <>
+                                <span className='discount'>{productDiscount}%</span>
+                                {/* <span>{productRealPrice}</span> */}
+                                <span>{productPrice.toLocaleString('ko-KR')} 원</span>
+                            </>
+                        ) }
+                    </S.ProductPriceWrap>
+                </div>
+            </Link>
+            <S.ButtonWrap >
+                <img
+                    src={`${process.env.PUBLIC_URL}/assets/images/layout/shopping_cart_icon.png`}
+                    alt="장바구니아이콘"
+                />
+                <p>담기</p>
+            </S.ButtonWrap>
+        </S.ProductWrap>
+    ))
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch("http://localhost:10000/products/products?productAnimal=dog");
 
-                if (!response.ok) {
-                    throw new Error('상품을 불러오는 데 실패했습니다.');
-                }
+    const dogRecommendProducts = products
+        .filter((p) => p.productAnimal === "dog")
+        .filter((p) => p.productCategory === "의류")
+        .slice(0, 8).map(({
+        id, productName, productFileName, productPrice, productRealPrice, productDiscount
+    }) => (
+        <S.ProductWrap key={id}>
+            <Link to={`/store/read/${id}`}>
+                <S.imageWrap>
+                    <HeartBtn className="heart" id={id} type={"product"} />
+                    <img className='thumb' src={`${process.env.PUBLIC_URL}/assets/images/products/${productFileName}`} alt="" />
+                </S.imageWrap>
+                <div className='title-wrap'>
+                    <S.ProductTitle>{productName}</S.ProductTitle>
+                    <S.ProductPriceWrap>
+                        { productDiscount === 0 ? (
+                            <span>{productPrice}</span>
+                        ) : (
+                            <>
+                                <span className='discount'>{productDiscount}%</span>
+                                {/* <span>{productRealPrice}</span> */}
+                                <span>{productPrice.toLocaleString('ko-KR')} 원</span>
+                            </>
+                        ) }
+                    </S.ProductPriceWrap>
+                </div>
+            </Link>
+            <S.ButtonWrap >
+                <img
+                    src={`${process.env.PUBLIC_URL}/assets/images/layout/shopping_cart_icon.png`}
+                    alt="장바구니아이콘"
+                />
+                <p>담기</p>
+            </S.ButtonWrap>
+        </S.ProductWrap>
+    ))
 
-                const data = await response.json();
-                setProducts(data);
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
-            }
-        };
-
-        fetchProducts();
-    }, []);
-
-
-    // 로딩 상태 처리
-    if (loading) {
-        return <div>상품을 불러오는 중입니다...</div>;
-    }
-
-    // 에러 상태 처리
-    if (error) {
-        return <div>오류: {error}</div>;
-    }
 
     return (
         <div>
             <S.Content>
-                {/* 컬러 추천 상품 */}
-                <ClothesColor productList={products} />
+            {petKind === "강아지" ? (
+            <>
+                <S.MainTextWrap>
+                <S.MainTitle>강아지 추천 상품</S.MainTitle>
+                </S.MainTextWrap>
+                <S.ProductWraper>
+                {dogRecommendProducts}
+                </S.ProductWraper>
+            </>
+            ) : (
+            <>
+                <S.MainTextWrap>
+                <S.MainTitle>고양이 추천 상품</S.MainTitle>
+                </S.MainTextWrap>
+                <S.ProductWraper>
+                {catRecommendProducts}
+                </S.ProductWraper>
+            </>
+            )}
 
             </S.Content>
             <Footer />

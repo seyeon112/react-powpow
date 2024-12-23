@@ -59,6 +59,8 @@ S.Count = styled.div`
   color: #828282;
 `
 S.Content = styled.div`
+   line-height: 1.4;
+   font-size: 22px;
    margin: 30px 0px;
    padding: 30px 0px;
    border-bottom: 1px solid #D9D9D9;

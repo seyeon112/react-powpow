@@ -7,14 +7,17 @@ const FindIdComplete = () => {
   const { state } = useContext(FindContext);
   
   const [message, setMessage] = useState("로딩 중");
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     if (state.memberEmail) {
       setMessage(state.memberEmail); 
+      setIsUpdate(true)
     } else {
-      setMessage("회원 확인 실패");
+      setMessage("회원 확인 중");
+      setIsUpdate(true)
     }
-  }, [state.memberEmail]);
+  }, [state.memberEmail, isUpdate]);
 
   return (
     <div>

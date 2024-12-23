@@ -26,6 +26,7 @@ const CommunityMain = () => {
 
     const myPosts = popularCommunites.slice(0, 5).map(({id, imageName1}) => (
         <S.MyPost key={id} >
+            {console.log(id)}
             <S.Heart>
                  <HeartBtn id={id} type={"community"} />
             </S.Heart>
@@ -41,7 +42,7 @@ const CommunityMain = () => {
             <S.BannerWrapper>
                     <p className='text1'>소중한 나의 반려동물과의 추억을 <br/>기록할 수 있어요!</p>
                     <p className='text2'>펫스널 컬러 별 포포 친구들 게시물 구경하러 와요</p>
-                    <Link to={"/post/all"}>
+                    <Link to={"/post/recommend/all"}>
                         <button>게시물 보러가기</button>
                     </Link>
 
@@ -87,7 +88,7 @@ const CommunityMain = () => {
                 <S.ColorBox>
                     <S.OrangeBox>
                         <S.ColorName>ORANGE</S.ColorName>
-                        <Link to={"/post/orange"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/orange"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"Orange"}/>
                         </S.PostBox>
@@ -95,7 +96,7 @@ const CommunityMain = () => {
 
                     <S.GoldBox>
                         <S.ColorName>GOLD</S.ColorName>
-                        <Link to={"/post/gold"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/gold"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"Gold"}/>
                         </S.PostBox>
@@ -103,7 +104,7 @@ const CommunityMain = () => {
 
                     <S.GradationBox>
                         <S.ColorName>GRADATION</S.ColorName>
-                        <Link to={"/post/gradation"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/gradation"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"Gradation"}/>
                         </S.PostBox>
@@ -111,7 +112,7 @@ const CommunityMain = () => {
 
                     <S.LightPurpleBox>
                         <S.ColorName>LIGHT PURPLE</S.ColorName>
-                        <Link to={"/post/light-purple"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/light-purple"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"LightPurple"}/>
                         </S.PostBox>
@@ -119,7 +120,7 @@ const CommunityMain = () => {
 
                     <S.SkyBlueBox>
                         <S.ColorName>SKY BLUE</S.ColorName>
-                        <Link to={"/post/sky-blue"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/sky-blue"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"SkyBlue"}/>
                         </S.PostBox>
@@ -127,7 +128,7 @@ const CommunityMain = () => {
 
                     <S.SageGreenBox>
                         <S.ColorName>SAGE GREEN</S.ColorName>
-                        <Link to={"/post/sage-green"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/sage-green"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"SageGreen"}/>
                         </S.PostBox>
@@ -135,7 +136,7 @@ const CommunityMain = () => {
 
                     <S.IceBlueBox>
                         <S.ColorName>ICE BLUE</S.ColorName>
-                        <Link to={"/post/ice-blue"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/ice-blue"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"IceBlue"}/>
                         </S.PostBox>
@@ -143,7 +144,7 @@ const CommunityMain = () => {
 
                     <S.DustySilverBox>
                         <S.ColorName>DUSTY SILVER</S.ColorName>
-                        <Link to={"/post/dusty-silver"}><S.AllToGo>전체보기</S.AllToGo></Link>
+                        <Link to={"/post/recommend/sky-blue"}><S.AllToGo>전체보기</S.AllToGo></Link>
                         <S.PostBox>
                             <CommunityComponent postColor={"DustySilver"}/>
                         </S.PostBox>

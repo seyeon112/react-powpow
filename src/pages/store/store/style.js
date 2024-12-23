@@ -5,9 +5,17 @@ import theme from "../../../global/theme";
 
 const S = {}
 
+// 인피니티 스크롤
+S.InfiniteScrollContainer = styled.div`
+  & .infinite-scroll-component {
+    overflow: hidden !important;
+  }
+`
+
 S.StoreMainWrap = styled.div`
   /* width: 1920px; */
-  margin: 0 auto;
+  margin: 0 auto 100px auto;
+  overflow: hidden;
 
 `
 S.StoreMain = styled.div`
@@ -129,14 +137,12 @@ S.ProductDiscountWrap = styled.div`
     flex-wrap: wrap;
 `
 
-
 // 버튼 정렬 스타일
-
 S.SortButtonWrapper = styled.div`
   display: flex;
   width: 500px;
   justify-content: space-between;
-  margin: 176px 0 60px auto;
+  margin: 0 0 0 auto;
   
   & > div {
     position: relative;
@@ -213,6 +219,7 @@ S.GoShopping = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  margin: 0 auto 150px auto;
 
   & img {
     width: 491px;
@@ -336,7 +343,7 @@ S.StoreToCommunityBanner = styled.div`
   width: 1440px;
   height: 600px;
   position: relative;
-
+  margin: 0 auto;
 `
 
 S.CommunityBtnWrap = styled.div`
@@ -392,7 +399,7 @@ S.GoShopping2 = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 150px auto;
 
   & img:nth-child(2){
     margin-left: 58px;
@@ -593,5 +600,205 @@ S.Heart = styled.div`
   }
 `
 
+
+// 스타일 추가
+S.ProductWraper = styled.div`
+width: 1440px;
+margin: 0 auto 150px auto;
+row-gap: 48px;
+column-gap: 24px;
+display: flex;
+flex-wrap: wrap;
+
+& .swiper-grid > .swiper-wrapper {
+    gap: 48px 30px !important;
+}
+
+& .swiper-grid-column .swiper-wrapper {
+    display: flex !important;
+    height: 100% !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+}
+
+& .swiper {
+    width: 100%;
+    margin: 0 0 120px 0;
+}
+
+& .swiper-wrapper {
+    height: ${(props) => props.$length < 5 ?  "530px" : "1200px"} !important;
+}
+
+& .swiper-slide {
+    margin: 0 !important;
+}
+`
+
+S.NoneMessage = styled.p`
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: 530px;
+font-size: 20px;
+font-weight: 600;
+`
+
+S.ProductWrap = styled.div`
+display: flex;
+flex-direction: column;
+`
+
+S.imageWrap = styled.div`
+position: relative;
+width: 342px;
+height: 342px;
+border-radius: 20px;
+overflow: hidden;
+margin: 0 0 16px 0;
+
+&.small {
+    width: 264px;
+    height: 264px;
+}
+
+& .thumb {
+    width: 100%;
+}
+
+& .heart {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 40px;
+}
+`
+
+S.ProductTitle = styled.p`
+font-size: 18px;
+width: 342px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+font-weight: 500;
+margin: 0 0 6px 0;
+`
+
+S.ProductPriceWrap = styled.div`
+display: flex;
+margin : 0 0 20px 0;
+& span {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+& .discount {
+    color: rgb(200, 63, 63);
+}
+`
+
+S.ButtonWrap = styled.div`
+display: flex;
+cursor: pointer;
+align-items: center;
+justify-content: center;
+border: solid 1px #bebebe;
+border-radius: 5px;
+width: 100%;
+height: 40px;
+
+& img {
+    margin: 0 4px 0 0;
+}
+
+& p {
+    font-size: 16px;
+    font-weight: 600;
+}
+`
+
+S.BestProductWraper = styled.div`
+width: 1440px;
+row-gap: 48px;
+column-gap: 24px;
+display: flex;
+flex-wrap: wrap;
+margin: 0 auto 120px auto;
+
+& .swiper {
+    width: 100%;
+    margin: 0 0 120px 0;
+
+}
+
+& .swiper-wrapper {
+    height: 440px;
+    gap: 30px;
+}
+
+
+& .thumb {
+    width: 100%;
+}
+& .swiper-slide {
+    margin: 0 !important;
+}
+`
+
+S.MainTextWrap = styled.div`
+width: 1440px;
+display: flex;
+justify-content: space-between;
+margin: 0 auto 40px auto;
+`
+
+S.MainTitle = styled.p`
+font-size: 40px;
+font-weight: 900;
+`
+
+// 스타일 추가
+
+S.SpecialLayout = styled.div`
+width: 1440px;
+display: flex;
+flex-direction: row;
+gap: 72px;
+& .big {
+    width: 537px;
+    flex-shrink: 0;
+
+    .image-wrap {
+        width: 537px;
+        height: 537px;
+    }
+
+}
+`
+
+S.SpecialProductWraper = styled.div`
+
+column-gap: 49px;
+row-gap: 40px;
+display: flex;
+flex-wrap: wrap;
+margin: 0 0 120px 0;
+
+& .item{
+    width: 244px;
+}
+
+& .image-wrap {
+    width: 244px;
+    height: 244px;
+}
+
+& .thumb {
+    width: 100%;
+}
+`
 
 export default S;
