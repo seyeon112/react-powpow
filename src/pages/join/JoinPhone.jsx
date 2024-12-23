@@ -56,7 +56,7 @@ const JoinPhone = () => {
     return alert("인증번호를 발송했습니다.");
   };
   
-  const testCode = "123456"
+  // const testCode = "123456"
   // verificationCode 할 때 이걸로 변경
   
   const confirmVerificationCode = () => {
