@@ -227,7 +227,7 @@ const PetsonalProvider = ({children}) => {
       },
       Gold : {
         message : ["골드색은 발랄하고 부지런하며 용감한 성격을 가진 색깔입니다.", "흥이 많고 재밌는 성격으로 언제나 주변을 즐겁게 만듭니다. ", "흥이 많고 재밌는 성격으로 언제나 주변을 즐겁게 만듭니다.", "어려운 상황에서도 두려움 없이 나서는 용맹함을 가지고 있습니다."],
-        boxColor : "#F9F9FA",
+        boxColor : "#FFDA3A",
         imageSrc : "/assets/images/petsonal/gold-result.jpg",
         title : "발랄한 부지러니"
       },
