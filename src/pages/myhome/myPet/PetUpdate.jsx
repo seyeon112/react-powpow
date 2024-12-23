@@ -24,22 +24,25 @@ const PetUpdate = () => {
     const getPet = async () => {
       try {
         const response = await fetch(`http://localhost:10000/my-pet/${id}`);
-        if (!response.ok) return console.error('데이터가 없습니다.');
+        if (!response.ok) {
+          console.error('데이터가 없습니다.');
+          return;
+        }
         const petData = await response.json();
-
-        // 날짜 포맷팅: petData.petBirth를 'yyyy-MM-dd' 형식으로 변환
+  
+        console.log("Fetched pet data:", petData); // 데이터 확인용 콘솔 출력
+  
         const formattedDate = new Date(petData.petBirth).toISOString().split('T')[0];
-
+  
         // 초기값 설정
-        setPetName(petData.petName);
-        setPetKind(petData.petKind);
-        setPetGender(petData.petGender);
-        setPetBreed(petData.petBreed);
-        setPetBreed(petData.petWeight);
-        setPetNeuter(petData.petNeuter);
-        setPetFilePath(petData.petFilePath);
-        setPetFileName(petData.petFileName);
-
+        setPetName(petData.petName || "");
+        setPetKind(petData.petKind || "");
+        setPetGender(petData.petGender || "");
+        setPetBreed(petData.petBreed || "");
+        setPetNeuter(petData.petNeuter || "");
+        setPetFilePath(petData.petFilePath || "");
+        setPetFileName(petData.petFileName || "");
+  
         // form 값 설정
         setValue("petName", petData.petName);
         setValue("petKind", petData.petKind);
@@ -49,8 +52,6 @@ const PetUpdate = () => {
         setValue("petWeight", petData.petWeight);
         setValue("petNeuter", petData.petNeuter);
         setValue("petVet", petData.petVet);
-        setValue("uploadFile", petData.petImage[0]);
-
       } catch (error) {
         console.error('데이터 로드 중 오류 발생:', error);
       }
@@ -62,7 +63,7 @@ const PetUpdate = () => {
     try {
       const formData = new FormData();
 
-      
+
       const { petName, petKind, petGender, petBreed, petBirth, petWeight, petNeuter, petVet, petImage } = data;
 
       formData.append("memberId", currentUser.id);
@@ -79,17 +80,24 @@ const PetUpdate = () => {
         formData.append("uploadFile", petImage[0]);
       }
 
-      const response = await fetch("http://localhost:10000/my-pet/upload", {
+      const uploadResponse = await fetch("http://localhost:10000/my-pet/upload", {
         method: "POST",
         body: formData,
       });
 
-      const resData = await response.json();
-      formData.append("uuid", resData.uuid);
-      formData.append("petFilePath", petFilePath);
-      formData.append("petFileName", petFileName);
+      const updatedResponse = await uploadResponse.json();
+      console.log("Update response: ", updatedResponse);
 
-     
+      if (updatedResponse?.uuid) {
+        // uuid를 append해서 보낸다
+        formData.append("uuid", updatedResponse.uuid);
+
+      } else {
+        // 아니면 그냥 보낸다. uuid없이 보낸다.
+        formData.append("uuid", "");
+      }
+
+
       const updateResponse = await fetch("http://localhost:10000/my-pet/petEdit", {
         method: "PUT",
         body: formData,
@@ -98,7 +106,7 @@ const PetUpdate = () => {
       const updateResData = await updateResponse.json();
       console.log(data)
       alert(updateResData.message);
-      // navigate("/my-pet");
+      navigate("/my-pet");
 
     } catch (error) {
       console.error('폼 제출 중 오류 발생:', error);
@@ -109,7 +117,7 @@ const PetUpdate = () => {
     <S.PetWapper>
       <form encType="multipart/form-data" onSubmit={handleSubmit(handleFormSubmit)}>
         <div className='button-postion'>
-          <S.Button id="submit-button" type="submit" disabled={isSubmitting}>
+          <S.Button id="submit-button" disabled={isSubmitting}>
             수정 완료
           </S.Button>
         </div>
@@ -120,8 +128,12 @@ const PetUpdate = () => {
                 <img src={petImagePreview} alt="펫 이미지" />
               ) : (
                 <img
-                  src={`http://localhost:10000/my-pet/display?fileName=${petFilePath}/${petFileName}`}
-                  alt={`${petName} 이미지`}
+                  src={
+                    petFilePath && petFileName
+                      ? `http://localhost:10000/my-pet/display?fileName=${petFilePath}/${petFileName}`
+                      : "default-image-path.jpg" 
+                  }
+                  alt={petName ? `${petName} 이미지` : "펫 이미지"}
                 />
               )}
             </S.Profilepic>
@@ -162,22 +174,22 @@ const PetUpdate = () => {
               <S.PetKind>반려종류</S.PetKind>
               <S.RadioWrap>
                 <S.Gap>
-                  <input 
-                    type="radio" 
-                    {...register("petKind", { required: true })} 
-                    value="반려견" 
+                  <input
+                    type="radio"
+                    {...register("petKind", { required: true })}
+                    value="반려견"
                     checked={petKind === "반려견"}
-                    onChange={(e) => setPetKind(e.target.value)} 
+                    onChange={(e) => setPetKind(e.target.value)}
                   />
                   <label>반려견</label>
                 </S.Gap>
                 <S.Gap>
-                  <input 
-                    type="radio" 
-                    {...register("petKind", { required: true })} 
-                    value="반려묘" 
+                  <input
+                    type="radio"
+                    {...register("petKind", { required: true })}
+                    value="반려묘"
                     checked={petKind === "반려묘"}
-                    onChange={(e) => setPetKind(e.target.value)} 
+                    onChange={(e) => setPetKind(e.target.value)}
                   />
                   <label>반려묘</label>
                 </S.Gap>
@@ -187,22 +199,22 @@ const PetUpdate = () => {
               <S.PetGender>성별</S.PetGender>
               <S.RadioWrap>
                 <S.Gap>
-                  <input 
-                    type="radio" 
-                    {...register("petGender", { required: true })} 
-                    value="수컷" 
+                  <input
+                    type="radio"
+                    {...register("petGender", { required: true })}
+                    value="수컷"
                     checked={petGender === "수컷"}
-                    onChange={(e) => setPetGender(e.target.value)} 
+                    onChange={(e) => setPetGender(e.target.value)}
                   />
                   <label>수컷</label>
                 </S.Gap>
                 <S.Gap>
-                  <input 
-                    type="radio" 
-                    {...register("petGender", { required: true })} 
-                    value="암컷" 
+                  <input
+                    type="radio"
+                    {...register("petGender", { required: true })}
+                    value="암컷"
                     checked={petGender === "암컷"}
-                    onChange={(e) => setPetGender(e.target.value)} 
+                    onChange={(e) => setPetGender(e.target.value)}
                   />
                   <label>암컷</label>
                 </S.Gap>
@@ -230,22 +242,22 @@ const PetUpdate = () => {
               <S.PetNeuter>중성화</S.PetNeuter>
               <S.RadioWrap>
                 <S.Gap>
-                  <input 
-                    type="radio" 
-                    value="했어요" 
-                    {...register("petNeuter")} 
+                  <input
+                    type="radio"
+                    value="했어요"
+                    {...register("petNeuter")}
                     checked={petNeuter === "했어요"}
-                    onChange={(e) => setPetNeuter(e.target.value)} 
+                    onChange={(e) => setPetNeuter(e.target.value)}
                   />
                   <label>했어요</label>
                 </S.Gap>
                 <S.Gap>
-                  <input 
-                    type="radio" 
-                    value="안했어요" 
-                    {...register("petNeuter")} 
+                  <input
+                    type="radio"
+                    value="안했어요"
+                    {...register("petNeuter")}
                     checked={petNeuter === "안했어요"}
-                    onChange={(e) => setPetNeuter(e.target.value)} 
+                    onChange={(e) => setPetNeuter(e.target.value)}
                   />
                   <label>안했어요</label>
                 </S.Gap>
