@@ -70,4 +70,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)-->
 
+<div align="center">
+  
+  ![powpowlogo](https://github.com/user-attachments/assets/5eccf7ac-5dee-4a2d-af36-a5348938f192)
+
+
+  ## 포포의 바구니
+  #### 내 반려동물의 새로운 정체성을 컬러로 발굴하는 웹 서비스
+  
+
+</div>
+<br/>
+
+### 📜 작품소개
+- - -
+
+
+
+
 
