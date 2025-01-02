@@ -77,7 +77,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
   ## 포포의 바구니
   #### 내 반려동물의 새로운 정체성을 컬러로 발굴하는 웹 서비스
-  
+
+  ![1](https://github.com/user-attachments/assets/23119587-9b1c-4a13-8100-b78a83b9a6a2)
 
 </div>
 <br/>
