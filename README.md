@@ -85,6 +85,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### 📜 작품소개
 - - -
+![3](https://github.com/user-attachments/assets/c1b563b7-3572-4f35-ad38-6d306933424a)
+![4](https://github.com/user-attachments/assets/8571d45b-848f-4c68-811a-8d7566a6afd6)
+### 🤔 프로젝트 배경
+---
+![2](https://github.com/user-attachments/assets/8a901cf9-3632-4ac2-a7fd-8d9fe700f23a)
 
 
 
